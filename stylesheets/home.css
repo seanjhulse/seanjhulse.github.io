@@ -1,0 +1,129 @@
+@font-face {
+  font-family: 'Caberet';
+  src: url('../fonts/Cabaret-ICG.woff') format('woff'),
+   url('../fonts/Cabaret-ICG.ttf') format('truetype');
+}
+
+body {
+  background-color: rgb(27, 25, 25);
+  margin: 0 auto;
+}
+h1 {
+  text-align: center;
+  font-size: 100px;
+  font-family: Caberet;
+  font-weight: normal;
+  margin: 0;
+  letter-spacing: 0.05rem;
+  background: -webkit-linear-gradient(#ff8f00, #FFEB3B);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+h2 {
+  font-family: 'Bungee Shade', cursive;
+  color: #ffd22e;
+  letter-spacing: 0.05rem;
+  font-size: 2rem;
+  margin: 0;
+}
+p {
+  font-size: 1.5rem;
+  color: #f5f5f5;
+}
+.center-text {
+  text-align: center;
+}
+.site-header {
+  position: relative;
+}
+.row {
+  margin: 0 auto;
+  padding: 1rem;
+  position: relative;
+  margin: 2rem 0;
+}
+.slider {
+  top: 25px;
+  opacity: 0;
+  transition: all 1s ease-in-out;
+}
+.slide-up {
+  opacity: 1;
+  transform: translateY(-25px);
+}
+
+@-webkit-keyframes flashing {
+  from {
+    background: -webkit-linear-gradient(#794503, #675f19);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  40%,
+  70% {
+    background: -webkit-linear-gradient(#ff8f00, #FFEB3B);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  60%,
+  80% {
+    background: -webkit-linear-gradient(#794503, #675f19);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  to {
+    background: -webkit-linear-gradient(#ff8f00, #FFEB3B);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+@keyframes flashing {
+  from {
+    background: -webkit-linear-gradient(#794503, #675f19);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  40%,
+  70% {
+    background: -webkit-linear-gradient(#ff8f00, #FFEB3B);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  60%,
+  80% {
+    background: -webkit-linear-gradient(#794503, #675f19);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  to {
+    background: -webkit-linear-gradient(#ff8f00, #FFEB3B);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+.flashing {
+  animation-fill-mode: forwards;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-delay: 2s;
+  animation-delay: 2s;
+  -webkit-animation-name: flashing;
+  animation-name: flashing;
+  background: -webkit-linear-gradient(#794503, #675f19);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+@media (min-width: 800px) {
+  body {
+    max-width: 900px;
+  }
+}
