@@ -27,7 +27,7 @@ class Slider {
     var elemBounds = elem.getBoundingClientRect();
     var elemY = elemBounds.y;
 
-    if (this.y - elemY - elem.offsetHeight > 0) {
+    if (this.y - elemY - elem.offsetHeight > -50) {
       elem.classList.add(this.slideClass);
     } 
     if (this.y - elemY - elem.offsetHeight < 0) {
