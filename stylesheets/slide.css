@@ -1,0 +1,29 @@
+/* Slide effects */
+.slider {
+  top: 25px;
+  transition: all 1s ease-in-out .1s;
+}
+.hidden {
+  opacity: 0;
+}
+.up {
+  transform: translateY(50px);
+}
+.left {
+  transform: translateX(-50px);
+}
+.right {
+  transform: translateX(50px);
+}
+.slide.left {
+  transform: translateX(0);
+  opacity: 1;
+}
+.slide.right {
+  transform: translateX(0);
+  opacity: 1;
+}
+.slide.up {
+  transform: translateY(0);
+  opacity: 1;
+}

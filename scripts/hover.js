@@ -1,9 +1,9 @@
-class Slider {
+class Hover {
 
   constructor(options) {
     // collection of sliders
-    this.sliders = document.getElementsByClassName(options.element);
-    this.slideClass = options.slideClass;
+    this.hoverers = document.getElementsByClassName(options.element);
+    this.hoverClass = options.hoverClass;
 
     // vanilla JS window width and height
     var w = window,
@@ -21,21 +21,21 @@ class Slider {
   }
 
   isScrolledIntoView(elem) {
-
     var elemBounds = elem.getBoundingClientRect();
     var elemY = elemBounds.y;
-
-    if (this.y > elemY && elemY > -500) {
-      elem.classList.add(this.slideClass);
+    
+    if (this.y > elemY + elem.offsetHeight && elemY > 0) {
+      var translateY = 'translateY(' + (-(elemY/this.y)*40).toString() + 'px)';
+      console.log(translateY);
+      elem.style.transform = translateY;
     } else {
-      elem.classList.remove(this.slideClass);      
     }
   }
 
 
   listen() {
-    for(var i = 0; i < this.sliders.length; i++) {
-      this.isScrolledIntoView(this.sliders[i]);
+    for(var i = 0; i < this.hoverers.length; i++) {
+      this.isScrolledIntoView(this.hoverers[i]);
     }
   }
 

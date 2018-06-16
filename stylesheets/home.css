@@ -27,8 +27,26 @@ h2 {
   margin: 0;
 }
 p {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   color: #f5f5f5;
+}
+.grid {
+  display: block;
+}
+.reverse {
+  grid-column: 2;
+  grid-row: 1;
+}
+.two-col {
+  grid-template-columns: 1fr 1fr;
+}
+@media (min-width: 800px) {
+  .grid {
+    display: grid;
+  }
+  .icon-description {
+    max-width: 100%;
+  }
 }
 .center-text {
   text-align: center;
@@ -42,14 +60,30 @@ p {
   position: relative;
   margin: 2rem 0;
 }
-.slider {
-  top: 25px;
-  opacity: 0;
-  transition: all 1s ease-in-out;
+#ruby-icon {
+  background-image: url(../images/rubyicon.png);
 }
-.slide-up {
-  opacity: 1;
-  transform: translateY(-25px);
+#react-icon {
+  background-image: url('../images/reacticon.svg');
+}
+#vue-icon {
+  background-image: url('../images/vueicon.png');
+}
+#python-icon {
+  background-image: url('../images/pythonicon.png');
+}
+.icon {
+  margin: 2rem;
+  height: 250px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.icon-description {
+  align-self: center;
+  line-height: 1.75rem;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 @-webkit-keyframes flashing {

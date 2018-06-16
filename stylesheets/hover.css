@@ -1,0 +1,5 @@
+/* Hover effects */
+.hover {
+  transform: translateY(20px);
+  transition: all .5s linear;
+}
