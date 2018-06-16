@@ -71,9 +71,14 @@ p {
 }
 #python-icon {
   background-image: url('../images/pythonicon.png');
+  position: relative;
+  margin-top: 2rem;
+  margin-bottom: -2.5rem;
+  z-index: -1;
 }
 .icon {
   margin: 2rem;
+  margin-top: 4rem;
   height: 250px;
   background-size: contain;
   background-repeat: no-repeat;
