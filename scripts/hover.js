@@ -26,7 +26,6 @@ class Hover {
     
     if (this.y > elemY + elem.offsetHeight && elemY > 0) {
       var translateY = 'translateY(' + (-(elemY/this.y)*40).toString() + 'px)';
-      console.log(translateY);
       elem.style.transform = translateY;
     } else {
     }

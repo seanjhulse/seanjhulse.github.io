@@ -9,5 +9,9 @@ window.onload = function() {
   var hover = new Hover({
     element: 'hover',
     hoverClass: 'hovering'
-  })
+  });
+
+
+  var scene = new Scene();
+
 }
