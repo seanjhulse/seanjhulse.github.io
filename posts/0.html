@@ -17,7 +17,7 @@
 		</header>
 
 		<main>
-			<pre>
+			<pre aria-hidden="true">
     _____
    /    /|_ ___________________________________
   /    // /|                                  /|
@@ -85,7 +85,7 @@ output: 1 2 3 4 5 6 7 8 9 10
 				<p>Our program has a less obvious output for every input, n: 1, 2, ..., n-2, n-1, n. Why is that? Lets dig into the <strong>callstack</strong>.</p>
 				<p>The callstack is how your program starts and ends. From the first "main()" to the last "return", your program is somewhere on the callstack. What is a callstack? It's a stack of function/method <i>calls</i>. The structures behind that callstack are sophisticated, but we don't care much about that. We can treat the callstack like any other stack: a stack of books or a stack of cans. It's just a stack of things. Stacks in computer science are no different than stacks of books on a table. Lets say we have some books in our hands: <i>Hamlet</i>, <i>The Sound and the Fury</i>, and <i>The Hobbit</i>. If you place <i>The Hobbit</i> on the desk, then <i>The Sounds and the Fury</i>, then <i>Hamlet</i>, you have <i>Hamlet</i> on TOP, right? That's the <strong>top of the stack</strong>.</p>
 				<p>Now, try to put the books back into your hands one-by-one. Do you grab <i>The Hobbit</i>? Why not? Well, probably, because the rest of the books would come toppling down. The callstack operates the same way. We want to execute our functions in some meaningful order. Not just randomly. That order of execution is the stack order in which they are called (at least for our purposes).</p>
-				<pre>
+				<pre aria-hidden="true">
         _.-"\
     _.-"     \
  ,-"          \
@@ -368,7 +368,7 @@ output: 1 2 3 4 5 6 7 8 9 10
 			<section>
 				<h2>That's pretty much it.</h2>
 				<p>But that seems complicated. Why do I ever want to make a recursive function? Well, sometimes you don't know <i>when</i> you want to finish a loop. It might be after 100 iterations or just 1 iteration. With recursion, all you have to worry about is the base case. The easiest real world example is a binary search tree which looks like this:</p>
-				<pre>
+				<pre aria-hidden="true">
      1
     / \
    /   \
