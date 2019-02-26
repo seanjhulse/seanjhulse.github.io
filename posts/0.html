@@ -106,7 +106,7 @@ output: 1 2 3 4 5 6 7 8 9 10
 							<p><strong>main()</strong></p>
 							<p>We put main() on TOP of the callstack and enter the function.</p>
 						</div>
-						<div class="grid-item callstack-boxes">
+						<div class="grid-item callstack-boxes" aria-hidden="true">
 							<pre>
    +--------------+
   /              /|
@@ -129,7 +129,7 @@ output: 1 2 3 4 5 6 7 8 9 10
 							<p>We are now <i>executing</i> this function. So, we've left main(). It's at the bottom of the callstack. We are now inside echoValue(10). The if-statement is trivial. The value passed in is 10. Therefore, 10 != 0, we do not return. We go onto the next statement:</p>
 							<p>echoValue(9). Okay, so what do we do when we encounter another function? <strong>Add it onto the stack</strong></p>
 						</div>
-						<div class="grid-item callstack-boxes">
+						<div class="grid-item callstack-boxes" aria-hidden="true">
 							<pre>
    +--------------+
   /              /|
@@ -159,7 +159,7 @@ output: 1 2 3 4 5 6 7 8 9 10
 							<p>As you can tell this pattern will continue onwards. But not until infinity. It <i>would</i> continue infinitely if we didn't have that if-statement (and it would produce the infamous Stack Overflow error). That if-statement is an important statement. It's our <strong>base case</strong>.</p>
 							<p>The base case tells us when to stop recursion and "collapse" the call stack. Lets jump down to the base case</p>
 						</div>
-						<div class="grid-item callstack-boxes">
+						<div class="grid-item callstack-boxes" aria-hidden="true">
 							<pre>
    +--------------+
   /              /|
@@ -196,7 +196,7 @@ output: 1 2 3 4 5 6 7 8 9 10
 							<p>Value (0) is now equal to 0. So, we do NOT add another echoValue() function onto the call stack. We return from this function. You may also notice that we never reached the print statement for the value 0. Good. This checks out with our output above.</p>
 							<p>Instead, we <strong>POP</strong> the echoValue(0) function from the TOP of the callstack.</p>
 						</div>
-						<div class="grid-item callstack-boxes">
+						<div class="grid-item callstack-boxes" aria-hidden="true">
 							<pre>
    +--------------+
   /              /|
@@ -248,7 +248,7 @@ output: 1 2 3 4 5 6 7 8 9 10
 							<p>in this case, value == 1. What happens next? We return. Because this is a void function, we don't need to explicitly return, but I added it in there to be more clear. What happens when we return?</p>
 							<p><b>POP the function from the callstack</b></p>
 						</div>
-						<div class="grid-item callstack-boxes">
+						<div class="grid-item callstack-boxes" aria-hidden="true">
 							<pre>
    +--------------+
   /              /|
@@ -297,7 +297,7 @@ output: 1 2 3 4 5 6 7 8 9 10
 							<p>echoValue(2)</p>
 							<p>Same as before... As you can tell, we will keep popping until we return BACK to our echoValue(10) function and we print the value 10 to the console. Then what?</p>
 						</div>
-						<div class="grid-item callstack-boxes">
+						<div class="grid-item callstack-boxes" aria-hidden="true">
 							<pre>
    +--------------+
   /              /|
@@ -347,7 +347,7 @@ output: 1 2 3 4 5 6 7 8 9 10
 							<p>Main isn't special. We've logged values 1, 2, 3, ..., 9, 10 and now we've popped echoValue(10) from the callstack. What do we do next?</p>
 							<p>Hop BACK into main(). Continue where we left off! In this case it's return 0; So, we POP main() from the stack and now the callstack is empty. Our program has finished execution.</p>
 						</div>
-						<div class="grid-item callstack-boxes">
+						<div class="grid-item callstack-boxes" aria-hidden="true">
 							<pre>
    +--------------+
   /              /|
