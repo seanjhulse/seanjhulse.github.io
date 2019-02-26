@@ -1,4 +1,6 @@
-
+body {
+	overflow-x: hidden;
+}
 /* Grid */
 .grid {
 	display: block;
