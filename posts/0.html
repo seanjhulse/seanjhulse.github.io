@@ -5,6 +5,7 @@
 		<title>Sean Hulse</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link href="../stylesheets/app.css" rel="stylesheet" />
+		<link href="../stylesheets/callstack.css" rel="stylesheet" />
 		<script src="../javascripts/index.js" type="text/javascript"></script>
 	</head>
 
@@ -18,20 +19,21 @@
 		<main>
 			<pre>
     _____
-   /    /|_ ___________________________________________
-  /    // /|                                          /|
- (====|/ //   What is the callstack...               / |
-  (=====|/     and why do we care?                  / .|
- (====|/                                           / /||
-/_________________________________________________/ / ||
-|  _____________________________________________  ||  ||
-| ||                                            | ||
-| ||                                            | ||
-| |                                             | |  pjb (https://www.asciiart.eu/books/books)
+   /    /|_ ___________________________________
+  /    // /|                                  /|
+ (====|/ //   What is the callstack...       / |
+  (=====|/     and why do we care?          / .|
+ (====|/                                   / /||
+/_________________________________________/ / ||
+|  _____________________________________  ||  ||
+| ||                                    | ||
+| ||                                    | ||
+| |                                     | | 
+    pjb (https://www.asciiart.eu/books/books)
 			</pre>
 			<section>
 				<h1>Recursion.</h1>
-				<p>If you're here, you're stuck on recursion. It's a tough topic, if you're approaching it with no knowledge of how programs are executed. So, naturally, we should start there.</p>
+				<p>If you're here, you're stuck on recursion. If you're approaching it with no knowledge of how programs are executed, it might vex you. So, naturally, we should first understand how programs are executed, then explore when recursion is a cleaner option than iterating.</p>
 				<p>Lets say we have a program:</p>
 <pre>
 recursion.cpp
@@ -41,7 +43,7 @@ void echoValue(int value) {
 	if(value == 0) {
 		return;
 	}
-	std::cout << value << std::endl;
+	std::cout << value << " " ;
 	echoValue(value - 1);
 	return;
 }
@@ -51,11 +53,12 @@ int main() {
 }
 </code>
 compile: $ g++ recursion.cpp
+output: 10 9 8 7 6 5 4 3 2 1
 </pre>
 			</section>
 			<section>
 				<h2>Output.</h2>
-				<p>Our program has a simple output for every input, n: n, n-1, n-2, ..., 2, 1. The output feels intuitive because it follows our sense of logic. First we print the value. Then we call the function again and pass (n-1) into the function and continue... But it's actually not that simple. Under the hood, we're still "stacking" our functions on top of each other one by one. Lets look at a similar example with one line swapped.</p>
+				<p>Our program has a simple output for every input, n: n, n-1, n-2, ..., 2, 1. The output feels intuitive because it follows our sense of logic. First we print the value. Then we call the function again and pass (n-1) into the function and continue... But it's actually not that simple. Under the hood, we're still "stacking" our functions on top of each other one by one. Lets look at a similar example with one line swapped:</p>
 <pre>
 recursion.cpp
 <code>
@@ -65,7 +68,7 @@ void echoValue(int value) {
 		return;
 	}
 	echoValue(value - 1);
-	std::cout << value << std::endl;
+	std::cout << value << " " ;
 	return;
 }
 int main() {
@@ -74,13 +77,14 @@ int main() {
 }
 </code>
 compile: $ g++ recursion.cpp
+output: 1 2 3 4 5 6 7 8 9 10
 </pre>
 			</section>
 			<section>
 				<h2>Callstack.</h2>
 				<p>Our program has a less obvious output for every input, n: 1, 2, ..., n-2, n-1, n. Why is that? Lets dig into the <strong>callstack</strong>.</p>
-				<p>The callstack is how your program starts and ends. From the first "main()" to the last "return 0;", your program is somewhere on the callstack. What is a callstack? It's a stack of memory being allocated to function/method <i>calls</i>. As a simplifcation, we can treat the callstack like any other stack: a stack of books or a stack of cans. It's just a stack of things. Stacks in computer science are no different than stacks of books on a table. Lets say we have some books in our hands: "Hamlet", "The Sound and the Fury", and "The Hobbit". If you place "The Hobbit" on the desk, then "The Sounds and the Fury", then "Hamlet", you have "Hamlet" on <i>top</i>, right? That's the <strong>top of the stack</strong>.</p>
-				<p>Now, try to place the books back into your hands one-by-one. Do you grab "The Hobbit"? Why not? Because the whole thing comes toppling down. Well, now you understand the callstack. It operates the same way. We want to call our functions in some meaningful order. Not just randomly. That order is the order in which they are called (at least for our purposes).</p>
+				<p>The callstack is how your program starts and ends. From the first "main()" to the last "return", your program is somewhere on the callstack. What is a callstack? It's a stack of function/method <i>calls</i>. The structures behind that callstack are sophisticated, but we don't care much about that. We can treat the callstack like any other stack: a stack of books or a stack of cans. It's just a stack of things. Stacks in computer science are no different than stacks of books on a table. Lets say we have some books in our hands: <i>Hamlet</i>, <i>The Sound and the Fury</i>, and <i>The Hobbit</i>. If you place <i>The Hobbit</i> on the desk, then <i>The Sounds and the Fury</i>, then <i>Hamlet</i>, you have <i>Hamlet</i> on TOP, right? That's the <strong>top of the stack</strong>.</p>
+				<p>Now, try to put the books back into your hands one-by-one. Do you grab <i>The Hobbit</i>? Why not? Well, probably, because the rest of the books would come toppling down. The callstack operates the same way. We want to execute our functions in some meaningful order. Not just randomly. That order of execution is the stack order in which they are called (at least for our purposes).</p>
 				<pre>
         _.-"\
     _.-"     \
@@ -96,57 +100,288 @@ compile: $ g++ recursion.cpp
 				</pre>
 				<h3>How does the callstack look in our second example above?</h3>
 				<p>In order to keep this simple, I'm going to avoid nested lists or any funny business. Lets just pretend we are a stupid machine and we are going to read this line-by-line.</p>
-<pre>
-<code>
-<ol>
-<li>We come across main(). Great, we've entered our program...</li>
-<li>We come across echoValue(10). Okay, lets go inside that function. 
-echoValue(10) is now on the callstack</li>					
-<li>10 has been passed in as "value". We hit an if-statement. (value != 0). 
-So, we continue... Ah, we found a function! echoValue(10 - 1) 
-echoValue(10 - 1) is now added on TOP of the callstack</li>		
-<li>10 - 1 = 9. 9 has been passed in as "value". We hit an if-statement. (value != 0).
-So, we continue... Ah, we found a function! echoValue(9 - 1) 
-echoValue(9 - 1) is now added on TOP of the callstack</li>
-<li>9 - 1 = 8. 8 has been passed in as "value". We hit an if-statement. (value != 0). 
-So, we continue... Ah, we found a function! echoValue(8 - 1)
-echoValue(8 - 1) is now added on TOP of the callstack</li>
-<li>8 - 1 = 7. 7 has been passed in as "value". We hit an if-statement. (value != 0). 
-So, we continue... Ah, we found a function! echoValue(8 - 1)
-echoValue(7 - 1) is now added on TOP of the callstack</li>
-<li>...</li>					
-<li>3 - 1 = 2. 2 has been passed in as "value". We hit an if-statement. (value != 0). 
-So, we continue... Ah, we found a function! echoValue(2 - 1)
-echoValue(2 - 1) is now added on TOP of the callstack</li>
-<li>2 - 1 = 1. 1 has been passed in as "value". We hit an if-statement. (value != 0). 
-So, we continue... Ah, we found a function! echoValue(1 - 1)
-echoValue(1 - 1) is now added on TOP of the callstack</li>
-<li>1 - 1 = 0. 0 has been passed in as "value". We hit an if-statement. (value == 0). 
-So, we RETURN</li>
-<li>Now the our TOP function (echoValue(0)) is POPPED (removed) from the callstack. 
-What's the next book on the pile? Right, echoValue(1);</li>
-<li>We're now "back inside" echoValue(1)
-Where are we? We start on the next line from where we left off: std::cout << value << std::endl;
-What is value? <strong>1</strong></li>
-<li>Now we continue... We hit another return statement!</li>		
-<li>Now the our TOP function (echoValue(1)) is POPPED (removed) from the callstack.
-What's the next book on the pile? Right, echoValue(2);</li>
-<li>We're now "back inside" echoValue(2). 
-Where are we? We start on the next line from where we left off: std::cout << value << std::endl;
-What is value? <strong>2</strong></li>
-<li>Now the our TOP function (echoValue(3)) is POPPED (removed) from the callstack. 
-What's the next book on the pile? Right, echoValue(3);</li>
-<li>We're now "back inside" echoValue(3) ...</li>
-<li>So on and so forth... until...</li>
-<li>Now the our TOP function (echoValue(10)) is POPPED (removed) from the callstack. 
-What's the next book on the pile? main();</li>
-<li>We're now "back inside" main(). We hit return 0; And we exit the program</li>
-</ol>
-</code>
-</pre>
+				<div class="callstack">
+					<div class="grid two-one-col">
+						<div class="grid-item">
+							<p><strong>main()</strong></p>
+							<p>We put main() on TOP of the callstack and enter the function.</p>
+						</div>
+						<div class="grid-item callstack-boxes">
+							<pre>
+   +--------------+
+  /              /|
+ /              / |
+*--------------*  |
+|              |  |
+|              |  |
+|   main()     |  |
+|              |  +
+|              | /
+|              |/
+*--------------*
+							</pre>
+						</div>
+					</div>
+					<div class="grid two-one-col">
+						<div class="grid-item">
+							<p><strong>echoValue(10)</strong></p>
+							<p>We put echoValue(10) on TOP of the callstack and begin executing that function.</p>
+							<p>We are now <i>executing</i> this function. So, we've left main(). It's at the bottom of the callstack. We are now inside echoValue(10). The if-statement is trivial. The value passed in is 10. Therefore, 10 != 0, we do not return. We go onto the next statement:</p>
+							<p>echoValue(9). Okay, so what do we do when we encounter another function? <strong>Add it onto the stack</strong></p>
+						</div>
+						<div class="grid-item callstack-boxes">
+							<pre>
+   +--------------+
+  /              /|
+ /              / |
+*--------------*  |
+|              |  |
+|              |  |
+|echoValue(10) |  |
+|              |  +
+|              | /|
+|              |/ |
+*--------------*  |
+|              |  |
+|              |  |
+|   main()     |  |
+|              |  +
+|              | /
+|              |/
+*--------------*
+							</pre>
+						</div>
+					</div>
+					<div class="grid two-one-col">
+						<div class="grid-item">
+							<p><strong>echoValue(9)</strong></p>
+							<p>We put echoValue(9) on TOP of the callstack and begin executing that function.</p>
+							<p>As you can tell this pattern will continue onwards. But not until infinity. It <i>would</i> continue infinitely if we didn't have that if-statement (and it would produce the infamous Stack Overflow error). That if-statement is an important statement. It's our <strong>base case</strong>.</p>
+							<p>The base case tells us when to stop recursion and "collapse" the call stack. Lets jump down to the base case</p>
+						</div>
+						<div class="grid-item callstack-boxes">
+							<pre>
+   +--------------+
+  /              /|
+ /              / |
+*--------------*  |
+|              |  |
+|              |  |
+| echoValue(9) |  |
+|              |  +
+|              | /|
+|              |/ |
+*--------------*  |
+|              |  |
+|              |  |
+|echoValue(10) |  |
+|              |  +
+|              | /|
+|              |/ |
+*--------------*  |
+|              |  |
+|              |  |
+|   main()     |  |
+|              |  +
+|              | /
+|              |/
+*--------------*
+							</pre>
+						</div>
+					</div>
+					<div class="grid two-one-col">
+						<div class="grid-item">
+							<p><strong>echoValue(0)</strong></p>
+							<p>We put echoValue(0) on TOP of the callstack and begin executing that function. This is where we come across the base case.</p>
+							<p>Value (0) is now equal to 0. So, we do NOT add another echoValue() function onto the call stack. We return from this function. You may also notice that we never reached the print statement for the value 0. Good. This checks out with our output above.</p>
+							<p>Instead, we <strong>POP</strong> the echoValue(0) function from the TOP of the callstack.</p>
+						</div>
+						<div class="grid-item callstack-boxes">
+							<pre>
+   +--------------+
+  /              /|
+ /              / |
+*--------------*  |
+|              |  |
+|              |  |
+| echoValue(0) |  |
+|              |  +
+|              | /|
+|              |/ |
+*--------------*  |
+|              |  |
+|              |  |
+| echoValue(*) |  |
+|              |  +
+|              | /|
+|              |/ |
+*--------------*  |
+|              |  |
+|              |  |
+| echoValue(9) |  |
+|              |  +
+|              | /|
+|              |/ |
+*--------------*  |
+|              |  |
+|              |  |
+|echoValue(10) |  |
+|              |  +
+|              | /|
+|              |/ |
+*--------------*  |
+|              |  |
+|              |  |
+|   main()     |  |
+|              |  +
+|              | /
+|              |/
+*--------------*
+							</pre>
+						</div>
+					</div>
+					<div class="grid two-one-col">
+						<div class="grid-item">
+							<p><strong>echoValue(1)</strong></p>
+							<p>echoValue(0) was POPPED. It's OFF the stack. Gone. What was below it? echoValue(1)! So, no we jump BACK into echoValue(1) where we left off. Right after our echoValue(0) call. That's the print statement! So finally we begin seeing output!</p>
+							<p>std::cout << value << " "</p>
+							<p>in this case, value == 1. What happens next? We return. Because this is a void function, we don't need to explicitly return, but I added it in there to be more clear. What happens when we return?</p>
+							<p><b>POP the function from the callstack</b></p>
+						</div>
+						<div class="grid-item callstack-boxes">
+							<pre>
+   +--------------+
+  /              /|
+ /              / |
+*--------------*  |
+|              |  |
+|              |  |
+| echoValue(1) |  |
+|              |  +
+|              | /|
+|              |/ |
+*--------------*  |
+|              |  |
+|              |  |
+| echoValue(*) |  |
+|              |  +
+|              | /|
+|              |/ |
+*--------------*  |
+|              |  |
+|              |  |
+| echoValue(9) |  |
+|              |  +
+|              | /|
+|              |/ |
+*--------------*  |
+|              |  |
+|              |  |
+|echoValue(10) |  |
+|              |  +
+|              | /|
+|              |/ |
+*--------------*  |
+|              |  |
+|              |  |
+|   main()     |  |
+|              |  +
+|              | /
+|              |/
+*--------------*
+							</pre>
+						</div>
+					</div>
+					<div class="grid two-one-col">
+						<div class="grid-item">
+							<p>echoValue(2)</p>
+							<p>Same as before... As you can tell, we will keep popping until we return BACK to our echoValue(10) function and we print the value 10 to the console. Then what?</p>
+						</div>
+						<div class="grid-item callstack-boxes">
+							<pre>
+   +--------------+
+  /              /|
+ /              / |
+*--------------*  |
+|              |  |
+|              |  |
+| echoValue(2) |  |
+|              |  +
+|              | /|
+|              |/ |
+*--------------*  |
+|              |  |
+|              |  |
+| echoValue(*) |  |
+|              |  +
+|              | /|
+|              |/ |
+*--------------*  |
+|              |  |
+|              |  |
+| echoValue(9) |  |
+|              |  +
+|              | /|
+|              |/ |
+*--------------*  |
+|              |  |
+|              |  |
+|echoValue(10) |  |
+|              |  +
+|              | /|
+|              |/ |
+*--------------*  |
+|              |  |
+|              |  |
+|   main()     |  |
+|              |  +
+|              | /
+|              |/
+*--------------*
+							</pre>
+						</div>
+					</div>
+					<div class="grid two-one-col">
+						<div class="grid-item">
+							<p>main()</p>
+							<p>Main isn't special. We've logged values 1, 2, 3, ..., 9, 10 and now we've popped echoValue(10) from the callstack. What do we do next?</p>
+							<p>Hop BACK into main(). Continue where we left off! In this case it's return 0; So, we POP main() from the stack and now the callstack is empty. Our program has finished execution.</p>
+						</div>
+						<div class="grid-item callstack-boxes">
+							<pre>
+   +--------------+
+  /              /|
+ /              / |
+*--------------*  |
+|              |  |
+|              |  |
+|   main()     |  |
+|              |  +
+|              | /
+|              |/
+*--------------*
+							</pre>
+						</div>
+					</div>
+				</div>
 			</section>
 			<section>
 				<h2>That's pretty much it.</h2>
+				<p>But that seems complicated. Why do I ever want to make a recursive function? Well, sometimes you don't know <i>when</i> you want to finish a loop. It might be after 100 iterations or just 1 iteration. With recursion, all you have to worry about is the base case. The easiest real world example is a binary search tree which looks like this:</p>
+				<pre>
+     1
+    / \
+   /   \
+  2     \
+ / \     3
+4   5   / \
+       9   \
+            8
+           / \
+          6   7
+				</pre>
+				<p>You don't need to know how this works in code. Just know that you can only reach any number or "node" from its parent node. Like, 2 and 3 can only be reached from 1. 4 and 5 can only be reached from 2. So, if you want to go to 4, you must go from 1 -> 2 -> 4.</p>
+				<p>With recursion, you can visit all the nodes on this tree (starting from 1). You might not KNOW how many nodes exist. So a for loop wouldn't be advisable. A while loop could work, but it actually looks quite messy. With recursion, you're not worried about how many nodes exist. You just want to STOP recursing when you hit some BASE CASE. So, what's the BASE CASE for a Binary Search Tree? Null. When you find a "null" node, it is the absence of a node. For example, 5 is a leaf node. It has a value if 5. But it has 2 NULL children. They don't exist. Our base case will stop recursing down that branch once we reach the NULL value.</p>
 			</section>
 		</main>
 	</body>
