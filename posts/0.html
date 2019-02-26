@@ -16,28 +16,137 @@
 		</header>
 
 		<main>
+			<pre>
+    _____
+   /    /|_ ___________________________________________
+  /    // /|                                          /|
+ (====|/ //   What is the callstack...               / |
+  (=====|/     and why do we care?                  / .|
+ (====|/                                           / /||
+/_________________________________________________/ / ||
+|  _____________________________________________  ||  ||
+| ||                                            | ||
+| ||                                            | ||
+| |                                             | |  pjb (https://www.asciiart.eu/books/books)
+			</pre>
 			<section>
-				<h1>What's HTTP?</h1>
-				<p>A user enters /r/learnprogramming with this <a href="https://www.reddit.com/r/learnprogramming/comments/anr3db/doing_my_first_fullstack_project_and_i_dont_even/efvhjj2/?context=3" target="_blank">POST</a>. I haphazardly and hand-wavingly explained HTTP requests along with the fundamentals of Ruby on Rails. It was one of those moments where I felt compelled to explain the world to someone. I remembered wishing someone told me all of that. I got a lot of attention for it, but I think it was misplaced. I was so hand-wavy that I feel I gave them a false sense of understanding.</p>
-				<p>So let me try again...</p>
-				<h2>What is HTTP?</h2>
-				<p>HTTP stands for HyperText Transfer Protocol. If we are willing to get into the weeds a little bit, "hypertext" means "text displayed on a screen", which makes HTTP a lot more logical, right? It's the protocol for transferring text from screen A to a screen B. From a web developer's standpoint, HTTP is only 4 functions: GET, POST, PUT, and DELETE. We don't <i>really</i> care how it happens. If you're really interested, just read Wikipedia and the subsequent details on the official RFC documentation. 99% of web development is just making 4 requests.
-				<p>We want to GET things, we want to POST (create) things, we want to PUT (update) things, or we want to DELETE things.</p>
-				<p>If we are going to be honest, web development is literally just doing those 4 things for things tied to a relational database. Sure, some complications come from security and complex relationships in the databse. However, browsers, HTTP, and SQL take 99% of the weight off our shoulders.</p>
+				<h1>Recursion.</h1>
+				<p>If you're here, you're stuck on recursion. It's a tough topic, if you're approaching it with no knowledge of how programs are executed. So, naturally, we should start there.</p>
+				<p>Lets say we have a program:</p>
+<pre>
+recursion.cpp
+<code>
+#include &lt;iostream&gt;
+void echoValue(int value) {
+	if(value == 0) {
+		return;
+	}
+	std::cout << value << std::endl;
+	echoValue(value - 1);
+	return;
+}
+int main() {
+	echoValue(10);
+	return 0;
+}
+</code>
+compile: $ g++ recursion.cpp
+</pre>
 			</section>
 			<section>
-				<h2>Ruby on Rails: Making the requests</h2>
-				<p>Okay, lets make a leap. We now know that we just have 4 ways to interact with data in the database. How does Ruby on Rails handle an HTTP request and translate that into 1 of the 4 interactions?</p>
-				<p>Again, I'm going to approach this from the web developer viewpoint (which coincides with the server viewpoint).</p>
-				<p>Lets follow a GET request through the HTTP system from client (you) to server (the website).</p>
-				<p><b>Starting from the client:</b></p>
-				<dl>
-					<dt>Request</dt>
-					<dd>GET https://domain.com/hello</dd>
-					<dt>Server gets kicked into action</dt>
-					<dd>Apache or NGINX makes some decisions</dd>
-					<dt></dt>
-				</dl>
+				<h2>Output.</h2>
+				<p>Our program has a simple output for every input, n: n, n-1, n-2, ..., 2, 1. The output feels intuitive because it follows our sense of logic. First we print the value. Then we call the function again and pass (n-1) into the function and continue... But it's actually not that simple. Under the hood, we're still "stacking" our functions on top of each other one by one. Lets look at a similar example with one line swapped.</p>
+<pre>
+recursion.cpp
+<code>
+#include &lt;iostream&gt;
+void echoValue(int value) {
+	if(value == 0) {
+		return;
+	}
+	echoValue(value - 1);
+	std::cout << value << std::endl;
+	return;
+}
+int main() {
+	echoValue(10);
+	return 0;
+}
+</code>
+compile: $ g++ recursion.cpp
+</pre>
+			</section>
+			<section>
+				<h2>Callstack.</h2>
+				<p>Our program has a less obvious output for every input, n: 1, 2, ..., n-2, n-1, n. Why is that? Lets dig into the <strong>callstack</strong>.</p>
+				<p>The callstack is how your program starts and ends. From the first "main()" to the last "return 0;", your program is somewhere on the callstack. What is a callstack? It's a stack of memory being allocated to function/method <i>calls</i>. As a simplifcation, we can treat the callstack like any other stack: a stack of books or a stack of cans. It's just a stack of things. Stacks in computer science are no different than stacks of books on a table. Lets say we have some books in our hands: "Hamlet", "The Sound and the Fury", and "The Hobbit". If you place "The Hobbit" on the desk, then "The Sounds and the Fury", then "Hamlet", you have "Hamlet" on <i>top</i>, right? That's the <strong>top of the stack</strong>.</p>
+				<p>Now, try to place the books back into your hands one-by-one. Do you grab "The Hobbit"? Why not? Because the whole thing comes toppling down. Well, now you understand the callstack. It operates the same way. We want to call our functions in some meaningful order. Not just randomly. That order is the order in which they are called (at least for our purposes).</p>
+				<pre>
+        _.-"\
+    _.-"     \
+ ,-"          \
+( \            \
+ \ \   Stacks   \
+  \ \            \
+   \ \         _.-;
+    \ \    _.-"   :
+     \ \,-"    _.-"
+      \(   _.-"  -shimrod (https://www.asciiart.eu/books/books)
+       `--"
+				</pre>
+				<h3>How does the callstack look in our second example above?</h3>
+				<p>In order to keep this simple, I'm going to avoid nested lists or any funny business. Lets just pretend we are a stupid machine and we are going to read this line-by-line.</p>
+<pre>
+<code>
+<ol>
+<li>We come across main(). Great, we've entered our program...</li>
+<li>We come across echoValue(10). Okay, lets go inside that function. 
+echoValue(10) is now on the callstack</li>					
+<li>10 has been passed in as "value". We hit an if-statement. (value != 0). 
+So, we continue... Ah, we found a function! echoValue(10 - 1) 
+echoValue(10 - 1) is now added on TOP of the callstack</li>		
+<li>10 - 1 = 9. 9 has been passed in as "value". We hit an if-statement. (value != 0).
+So, we continue... Ah, we found a function! echoValue(9 - 1) 
+echoValue(9 - 1) is now added on TOP of the callstack</li>
+<li>9 - 1 = 8. 8 has been passed in as "value". We hit an if-statement. (value != 0). 
+So, we continue... Ah, we found a function! echoValue(8 - 1)
+echoValue(8 - 1) is now added on TOP of the callstack</li>
+<li>8 - 1 = 7. 7 has been passed in as "value". We hit an if-statement. (value != 0). 
+So, we continue... Ah, we found a function! echoValue(8 - 1)
+echoValue(7 - 1) is now added on TOP of the callstack</li>
+<li>...</li>					
+<li>3 - 1 = 2. 2 has been passed in as "value". We hit an if-statement. (value != 0). 
+So, we continue... Ah, we found a function! echoValue(2 - 1)
+echoValue(2 - 1) is now added on TOP of the callstack</li>
+<li>2 - 1 = 1. 1 has been passed in as "value". We hit an if-statement. (value != 0). 
+So, we continue... Ah, we found a function! echoValue(1 - 1)
+echoValue(1 - 1) is now added on TOP of the callstack</li>
+<li>1 - 1 = 0. 0 has been passed in as "value". We hit an if-statement. (value == 0). 
+So, we RETURN</li>
+<li>Now the our TOP function (echoValue(0)) is POPPED (removed) from the callstack. 
+What's the next book on the pile? Right, echoValue(1);</li>
+<li>We're now "back inside" echoValue(1)
+Where are we? We start on the next line from where we left off: std::cout << value << std::endl;
+What is value? <strong>1</strong></li>
+<li>Now we continue... We hit another return statement!</li>		
+<li>Now the our TOP function (echoValue(1)) is POPPED (removed) from the callstack.
+What's the next book on the pile? Right, echoValue(2);</li>
+<li>We're now "back inside" echoValue(2). 
+Where are we? We start on the next line from where we left off: std::cout << value << std::endl;
+What is value? <strong>2</strong></li>
+<li>Now the our TOP function (echoValue(3)) is POPPED (removed) from the callstack. 
+What's the next book on the pile? Right, echoValue(3);</li>
+<li>We're now "back inside" echoValue(3) ...</li>
+<li>So on and so forth... until...</li>
+<li>Now the our TOP function (echoValue(10)) is POPPED (removed) from the callstack. 
+What's the next book on the pile? main();</li>
+<li>We're now "back inside" main(). We hit return 0; And we exit the program</li>
+</ol>
+</code>
+</pre>
+			</section>
+			<section>
+				<h2>That's pretty much it.</h2>
 			</section>
 		</main>
 	</body>
