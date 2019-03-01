@@ -35,7 +35,7 @@
 				<h1>Recursion.</h1>
 				<p>If you're here, you're stuck on recursion. If you're approaching it with no knowledge of how programs are executed, it might vex you. So, naturally, we should first understand how programs are executed, then explore when recursion is a cleaner option than iterating.</p>
 				<p>Lets say we have a program:</p>
-<pre>
+<pre class="code">
 recursion.cpp
 <code>
 #include &lt;iostream&gt;
@@ -59,7 +59,7 @@ output: 10 9 8 7 6 5 4 3 2 1
 			<section>
 				<h2>Output.</h2>
 				<p>Our program has a simple output for every input, n: n, n-1, n-2, ..., 2, 1. The output feels intuitive because it follows our sense of logic. First we print the value. Then we call the function again and pass (n-1) into the function and continue... But it's actually not that simple. Under the hood, we're still "stacking" our functions on top of each other one by one. Lets look at a similar example with one line swapped:</p>
-<pre>
+<pre class="code">
 recursion.cpp
 <code>
 #include &lt;iostream&gt;
