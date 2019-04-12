@@ -30,6 +30,17 @@
 class Node {
 	constructor() {
 		this.neighbors = [];
+		this.visited = False;
+	}
+
+	addNeighbor(node) {
+		this.neighbor.push(node);
+	}
+
+	traverseNeighbors() {
+		this.neighbors.forEach((neighbor) => {
+			// do something
+		})
 	}
 }
 				</pre>
@@ -39,6 +50,18 @@ class Node {
 class Graph {
 	constructor() {
 		this.nodes = []
+	}
+
+	addNode() {
+		let node = new Node();
+		this.nodes.push(node);
+	}
+
+	traverseGraph(vertex) {
+		vertex.neighbors.forEach((neighbor) => {
+			if(neighbor.visited) return;
+			this.traverseGraph(neighbor);
+		})
 	}
 }
 				</pre>
