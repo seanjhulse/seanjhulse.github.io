@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>Sean Hulse</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="../stylesheets/app.css" rel="stylesheet" />
+		<script src="../scripts/index.js" type="text/javascript"></script>
+
+		<link href="https://cdn.jsdelivr.net/gh/kognise/water.css@latest/water.min.css" rel="stylesheet">
+	</head>
+	<body>
+		<main>
+			<section>
+				<h1>Making your first website</h1>
+				<p>Hold onto your butts. This is not going to be your "MEAN" stack, bleeding edge, tutorial. This is going to be grandpa's Vietnam story. Not the one where he talks about how tough he was in Nam for killing a guy with his toothpick. This is him, chewing on a pipe, talking about how often he had to change his socks. But at the end of the day, you'll be better off for it. Because web development is not about making pretty websites or connecting friends in your measly social web. It's about getting data from point A to point B. Do you know how it happens? If so, <a href="#web-servers-section">go over to the next section</a></p>
+			</section>
+			<section>
+				<h2>TCP/IP</h2>
+				<p>HTTP is built on top of TCP and IP. Transmission Control Protocol (TCP) works in <i>conjuction</i> with Internet Protocol (IP). If the internet is a road, IP is the car. It gets you (the data) from place to place. TCP is like the driver. He controls how the car is moving. In the internet world, your car could be sent hurdling down Main St. in pieces completely out of order. Your tires could arrive an hour before your car seat. That's fine in the internet world. But TCP, he's a careful driver, he wants you to arrive in the same order you left. Front bumper first, back bumper last. Why is that important? Because it guarantees you don't get mangled along the way!</p>
+				<p>In the real world, we sometimes prefer data arrives as fast as possible – order be damned. Lets say you're listening for real-time data reports from your homebrew nuclear silo. Every 0.0001 seconds your silo sends out a packet of data: "OK", "UhOh". You don't want to clog up your network waiting for each "OK" and "UhOh" to reach your server. You just want to know as soon as possible if this silo is going to blow! That's when you'd prefer UDP over TCP.</p>
+				<p><strong>TL;DR TCP ensures data arrives in order</strong></p>
+				<h2>IP</h2>
+				<p>So lets follow a data packet from client (your computer) to server (https://google.co.uk).</p>
+				<ol>
+					<li>Open your browser and, in the URL, type https://google.co.uk. Then hit return / enter</li>
+					<li>First things first, where does https://google.co.uk live? On a computer, right? Yes, what is that computer's IP address? How do we figure that out? DNS. DNS is (simplistically) a table where a domain name like google.co.uk is mapped to an IP address like 172.217.8.195 (at least that's what my DNS told me).</li>
+					<li>Now my data is being sent from my computer to my local router in my house with the knowledge that it wants to reach 172.217.8.195.</li>
+					<li>The router forwards this to it's nearest node. The internet is just a series of nodes connected by mediums. My router is a node in my house and I connect over WiFi. A router could be a node in my ISP and it's connected over the wire.</li>
+					<li>My data gets passed around (possibly) hundreds of nodes before finally landing at 172.217.8.195.</li>
+					<li>That is where google.co.uk's web server sits. It's listening for requests from computers like my own. It responds to my request with some HTML.</li>
+					<li>We move back through some nodes to get to my router.</li>
+					<li>My router passes the data to my computer.</li>
+					<li>Finally, my computer renders that data.</li>
+				</ol>
+				<p><strong>TL;DR IP ensures data arrives in the correct location</strong></p>
+			</section>
+			<section>
+				<h2>HTTP</h2>
+				<p>So now we can send data from your computer to my computer, why do I need HTTP?</p>
+				<p>HTTP defines how our data should be formatted and transmitted, and how servers or browsers should respond. In other words, HTTP is the protocol that deals with the first "application layer" style of thinking. It was pretty much invented to help our servers deal with the question: "Well? What do you want?!"</p>
+				<p>It's pretty easy to understand at a high level and you rarely need to sink into the low level, but for the sake of our own astuteness, lets look at some of the HTTP.</p>
+				<p><strong>HTTP methods:</strong> GET, POST, PUT, DELETE</p>
+				<ul>
+					<li>GET: reserved for grabbing data (look, but don't touch)</li>
+					<li>POST: reserved for creating data</li>
+					<li>PUT: reserved for updating data</li>
+					<li>DELETE: reserved for deleting data</li>
+				</ul>
+				<p>See how intuitive that is?</p>
+				<p>Lets see the HTTP request header for a GET request</p>
+<pre>
+Request Header
+	:authority: www.google.co.uk
+	:method: GET
+	:path: /
+	:scheme: https
+	accept: text/html,application/xhtml+xml
+	accept-encoding: gzip, deflate, br
+	accept-language: en-US,en;q=0.9
+</pre>
+			<p>That is the request. A simple text only description. I want to GET a URL www.google.co.uk with the HTTPS scheme (just pretend it's the same as HTTP). My browser is willing to accept text/html or xhtml. But, basically, I just want some HTML data. I'm willing to decode compressed, gzipped, data and I'm requesting the en-US language. All of this should sort of feel like human readable sentences.</p>
+			<p><strong>TL;DR HTTP describes the type of request you're making (GET? Where? What do you want in return?)</strong></p>
+			</section>
+			<section id="web-servers-section">
+				<h2>Web Servers</h2>
+				<p>Now we have this protocol, HTTP. But we don't have any way of using it. We need to setup some software on our computers that listens for an HTTP request and handles it. That's a web server. Apache is probably the most far reaching web server software. So, we'll use Apache in our example, but there are many options for this type of software.</p>
+				<p>I'm going to assume you're using some version of Linux, but Apache is available on lots of Operating Systems (all?).</p>
+<pre>
+	$ sudo apt install apache2
+	$ sudo service apache2 start
+	# inside /etc/apache2 is a list of Apache files and folders
+</pre>
+			<p>Lets setup a basic HTTP web server. Apache's software will listen for HTTP requests, I just need to make sure it knows about that route and that we will actually respond. Just follow along with this webpage: <a href="https://www.linux.com/learn/apache-ubuntu-linux-beginners">https://www.linux.com/learn/apache-ubuntu-linux-beginners</a></p>
+			<p>That tutorial basically feels like magic right? That's because it <i>sort of is magic</i>. The magic of presupposed configuration files. Apache knows that 99% of websites are very similar. Instead of making everyone handle an HTTP request from scratch, Apache says "hey, I have a pretty good idea how most HTTP servers work. Why don't you just tell me some options you want and I'll handle the rest?" That's pretty much what Apache is for most websites. It's a series of configuration options turned off / on that allow a client's HTTP request to enter the server, get routed to the correct website, and send the response back out.</p>
+			<p>But what does Apache tell us about the deeper meaning behind a webserver? It needs to know which file/files to serve. Your website is a folder with many files inside it. By default, index.html is assumed to be the "root" or homepage of your website. This is a <strong>fundamental of programming</strong> that newbies continuosly ignore. They assume the computer can "know" something, but it does not. The computer only knows about the files it knows about. Apache needs you to point the configuration to your website's root directory. C++ needs you to <pre>#include "headers"</pre> ruby needs you to <pre>require libraries</pre> and so on and so forth. As you're continuing to program in your career, remember to ask yourself, what does my program know? How does it know it?</p>
+			<p><strong>TL;DR Apache decides who handles the HTTP request</strong></p>
+		</section>
+			
+		</main>
+	</body>
+</html>
