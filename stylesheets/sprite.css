@@ -1,0 +1,10 @@
+.sprite {
+	width: 300px;
+	display: none;
+}
+.sprite.active {
+	display: block;
+}
+.sprite-container {
+	position: relative;
+}
