@@ -11,6 +11,7 @@ class SpriteContainers {
 
 	init() {
 		document.querySelectorAll(this.containerClass).forEach((container) => {
+			container.setAttribute("aria-hidden", true);
 			this.containers.push(new SpriteContainer(container, container.getAttribute('data-sprite-speed')));
 		});
 	}
