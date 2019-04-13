@@ -86,6 +86,7 @@ Request Header
 			</section>
 			<section id="web-servers-section">
 				<h2>Web Servers</h2>
+				<p>Do you already know Apache? If so, <a href="#clients-section">go over to the next section</a>
 				<p>Now we have this protocol, HTTP. But we don't have any way of using it. We need to setup some software on our computers that listens for an HTTP request and handles it. That's a web server. Apache is probably the most far reaching web server software. So, we'll use Apache in our example, but there are many options for this type of software.</p>
 				<p>I'm going to assume you're using some version of Linux, but Apache is available on lots of Operating Systems (all?).</p>
 <pre>
@@ -97,8 +98,38 @@ Request Header
 			<p>That tutorial basically feels like magic right? That's because it <i>sort of is magic</i>. The magic of presupposed configuration files. Apache knows that 99% of websites are very similar. Instead of making everyone handle an HTTP request from scratch, Apache says "hey, I have a pretty good idea how most HTTP servers work. Why don't you just tell me some options you want and I'll handle the rest?" That's pretty much what Apache is for most websites. It's a series of configuration options turned off / on that allow a client's HTTP request to enter the server, get routed to the correct website, and send the response back out.</p>
 			<p>But what does Apache tell us about the deeper meaning behind a webserver? It needs to know which file/files to serve. Your website is a folder with many files inside it. By default, index.html is assumed to be the "root" or homepage of your website. This is a <strong>fundamental of programming</strong> that newbies continuosly ignore. They assume the computer can "know" something, but it does not. The computer only knows about the files it knows about. Apache needs you to point the configuration to your website's root directory. C++ needs you to <pre>#include "headers"</pre> ruby needs you to <pre>require libraries</pre> and so on and so forth. As you're continuing to program in your career, remember to ask yourself, what does my program know? How does it know it?</p>
 			<p><strong>TL;DR Apache decides who handles the HTTP request</strong></p>
+			<p>P.S. if anyone wants a more in depth tutorial on Apache with Linux let me know and I'll sort it out.</p>
 		</section>
-
+		<section id="clients-section">
+			<h2>Clients? What are they?</h2>
+			<p>Computers. That's really what they are 99% of the time. We use "client" and "server" because back in the day <i>clients</i> used to connect to networks. So, they were kind of like customers subscribing or using a service. Nowadays, they are generally consumers and our systems are somewhat more isolated, but the term stuck!</p>
+			<p>When a client is using a web browser, they are connecting to a service like https://google.co.uk/. The client makes a REQUEST for something via the browser and the server RESPONDS. That is <i>all that happens.</i> The client can onyl receive what you've sent and the browser can only display what is has received. The typical web server will respond with 3 main components:</p>
+			<ol>
+				<li>HTML (text markup for words we read)</li>
+				<li>CSS (stylesheet for styling the HTML)</li>
+				<li>JS (code that can manipulate the HTML / DOM)</li>
+			</ol>
+			<p>A lot of newbies get hung up on frameworks and the complexity of a network, database, etc. But web servers force us to modulate our code in a simplistic fashion. If you know you can only return text, some basic code, and some styling, it simplifies a lot of questions for us.</p>
+			<p>That's also why web servers are such a desirable medium for applications. Instead of compiling different version of my programs for every client: Linux, MacOS, Windows, and their various different processors, I can just make 1 server and have each OS / browser decide how it wants to deal with the formats I send it. This process streamlines the prototyping of applications.</p>
+			<h3>So what's the drawback?</h3>
+			<p>For one, browsers are not consistent and now we have to design around their differences. Firefox, Chrome, and IE are all going to treat my webpage differently. As they ugrade their browsers, the styling I used to use might deprecate or it might change in some undesirable manner. For two, clients now <i>need</i> the internet for our application, ugh. For three, clients have to trust us with their data, we need to deal with security, and we have to manage storage of data. Web services are expensive. As storage became cheaper, we've seen a massive uptick in web services, but it didn't used to always be so cheap.</p>
+			<p>Web servers have an easy job on paper, but developers will run into all of those issues above at one point or another. Solutions have started to be developed to offset server load (eg. PWAs), but we're starting to treat our browsers like mini-operating systems. It's an expensive job monitoring all of these applications, background processes, and still manage your simple webserver interaction. We're starting to push our browsers into the desktop application domain and it's anyone's guess to see just how that'll turn out.</p>
+			<p>I, for one, would love to sacrifice some functionality and reliance for speed, but maybe that's just because it'd make my job easier...</p>
+		</section>
+		<section>
+			<h2>Frameworks? What are they?</h2>
+			<p>Frameworks are bundles of libraries that make programming easier. They usually solve an abstract task like: making a desktop application, web server, or API. Web servers have hundreds of frameworks. Some are for backend (Ruby on Rails) and some are for frontend (ReactJS). The key to any framework is having some familiarity with the language(s) of choice and then just READ.</p>
+			<p>Yup. Reading is 99% of learning a framework. They often have opinionated models about <i>how</i> your code should look and where files should exist. For example, Ruby on Rails has this file structure:</p>
+<pre>
+/my_cool_webapp
+	/app
+		/controllers
+		/models
+		/views
+</pre>
+		<p>You can't (shouldn't) place your controllers anywhere other than the controllers folder. Same goes for the models and the views. Plus, what <strong>are</strong> views? What are controllers? Whelp, that's all Ruby on Rails specific. In Rails, controllers are where your "routing logic" exists. For example, if someone goes to cool_webapp.com/home then I need a controller and a function inside that controller file that will respond with home.html. And home.html should be in the views folder. See how it has "opinions"? We normally have to setup aa lot of logic in PHP and Apache to get someone to home.html. But with Ruby on Rails, we can let the default setup for the application take a lot of that work off our back.</p>
+		<p>That's the goal of all frameworks. Simplify the convetions that we do 100's of times. If a framework isn't simplifying / abstracting a convention in programming, then it's not a framework.</p>
+		</section>
 		</main>
 	</body>
 </html>
