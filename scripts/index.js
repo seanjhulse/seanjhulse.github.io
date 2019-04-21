@@ -1,6 +1,6 @@
 window.addEventListener('load', function() {
   setTheme(function() {
-    document.body.classList.add('active');
+    document.children[0].style.opacity = 1;
   });
   document.getElementById('theme-button').addEventListener('click', setThemeListener);
 });
