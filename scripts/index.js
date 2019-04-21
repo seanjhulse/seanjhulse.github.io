@@ -1,4 +1,4 @@
-window.addEventListener('load', function() {
+document.addEventListener('DOMContentLoaded', function() {
   setTheme(function() {
     document.children[0].style.opacity = 1;
   });
