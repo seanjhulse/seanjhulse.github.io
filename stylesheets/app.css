@@ -6,3 +6,8 @@ main {
 	position: relative;
 	z-index: 1;
 }
+#theme-button {
+	position: fixed;
+	top: 10px;
+	right: 10px;
+}
