@@ -6,6 +6,13 @@ main {
 	position: relative;
 	z-index: 1;
 }
+body {
+	opacity: 0;
+	transition: opacity 0.5s;
+}
+body.active {
+	opacity: 1;
+}
 #theme-button {
 	position: fixed;
 	top: 10px;

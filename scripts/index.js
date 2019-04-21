@@ -1,5 +1,7 @@
 window.addEventListener('load', function() {
-  setTheme();
+  setTheme(function() {
+    document.body.classList.add('active');
+  });
   document.getElementById('theme-button').addEventListener('click', setThemeListener);
 });
 
@@ -18,7 +20,7 @@ const setThemeListener = function() {
 
   setTheme();
 }
-const setTheme = function() {
+const setTheme = function(callback=undefined) {
   let theme = localStorage.getItem('theme');
   if(theme == "dark") {
     document.getElementById('theme-button').innerText = "Dark Theme";
@@ -29,5 +31,8 @@ const setTheme = function() {
     document.getElementById('theme-button').innerText = "Light Theme";
     document.body.classList.remove('dark');
     document.body.classList.add('light');
+  }
+  if(callback) {
+    callback();
   }
 }
