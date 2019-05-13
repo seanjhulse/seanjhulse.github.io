@@ -1,0 +1,1 @@
+import { h } from 'preact'import Sprites from "../../posts/sprites.js"export default function() {	 return {		"sprites": {			"name": "sprites.js",			"jsx": Sprites,		}	}}

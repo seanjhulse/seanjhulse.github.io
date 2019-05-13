@@ -6,3 +6,6 @@ main {
 	position: relative;
 	z-index: 1;
 }
+a {
+	margin-right: 5px;
+}
