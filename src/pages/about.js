@@ -10,9 +10,7 @@ class About extends Component {
 				<Preact />
 				<p>Renders all of the posts, homepage, and the about page. Why did I choose Preact? Well, I was spending more and more of my time writing JS for the site. I enjoy JS for making movement and illustration possible, but it was difficult trying to make different scripts appear all over the place. Instead, I went with Preact because it's a lightweight solution to organize my code.</p>
 				<b>But isn't that still going to be slow?</b>
-				<p>Meh, I'm okay with a slower solution. Yes, it takes 0.5s to load my content instead of the 0.1s it used to take. But people can hardly see that kind of difference and toggling between posts becomes much faster after the first render. This way, I'm also making less requests to Github Pages to keep the site chugging along.</p>
-				<b>Admit it, you just like fancy JS frameworks</b>
-				<p>Yes...</p>
+				<p>Meh, I'm okay with a slower solution as long as it allows me to build a more beautiful website with less overall overhead. Yes, it takes 0.5s to load my content instead of the 0.1s it used to take. But now toggling between posts becomes much faster after the first render and I can organize my JS and my HTML for my posts in a single file. This way, I'm also making less requests to Github Pages to keep the site chugging along in an organized way.</p>
 				<Github />
 				<p>Good ole' Github Pages. Runs my site, tracks my changes, and does it all for free! I can't believe we have this nowadays. I use Github Pages for my personal site because it lets me direct people to my scripty playground and it helps keep my site grounded. No users, no database, just code and text.</p>
 			</section>
