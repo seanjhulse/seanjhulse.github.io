@@ -92,7 +92,7 @@ const postData = function () {
 
 	fs.readdir(postsFolder, (err, files) => {
 		generateData(files)
-			.then(words => pen.write(words.join('')))
+			.then(words => pen.write(words.join(',')))
 			.then(() => pen.write('\r\t]\r}'))
 	});
 }

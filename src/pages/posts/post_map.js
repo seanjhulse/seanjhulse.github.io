@@ -1,1 +1,1 @@
-import { h } from 'preact'import Sprites from "../../posts/sprites.js"export default function() {	 return {		"sprites": {			"name": "sprites.js",			"jsx": Sprites,		}	}}
+import { h } from 'preact'import Sockets from "../../posts/Sockets.js"import Sprites from "../../posts/sprites.js"export default function() {	 return {		"Sockets": {			"name": "Sockets.js",			"jsx": Sockets,		},		"sprites": {			"name": "sprites.js",			"jsx": Sprites,		}	}}

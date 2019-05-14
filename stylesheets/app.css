@@ -9,3 +9,9 @@ main {
 a {
 	margin-right: 5px;
 }
+button:disabled {
+	background: gray;
+}
+button:disabled:hover {
+	background: gray;	
+}
