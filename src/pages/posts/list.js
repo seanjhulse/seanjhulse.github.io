@@ -44,7 +44,7 @@ class List extends Component {
 					{posts}
 				</ul>
 				<h2>Archives</h2>
-				<p>Archived posts are old posts that I made when this site was a traditional static website. The new ones are useing Preact, these archived ones are using pure static JS, HTML, and CSS.</p>
+				<p>Archived posts are old posts that I made when this site was a traditional static website. The new ones are using Preact, these archived ones are using pure static JS, HTML, and CSS.</p>
 				<ul>
 					{archives}
 				</ul>
