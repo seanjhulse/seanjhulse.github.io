@@ -17,6 +17,7 @@ class App extends Component {
 				<Header />
 				<Router history={createHashHistory()}>
 					<Home path="/" />
+					<Home path="/home" />
 					<Posts path="/posts/:id?" />
 					<About path="/about" />
 				</Router>
