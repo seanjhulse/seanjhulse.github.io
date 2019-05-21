@@ -3,6 +3,7 @@ import Header from './layout/header';
 import Posts from './pages/posts';
 import Home from './pages/home';
 import About from './pages/about';
+import Scene from './misc/scene';
 import Router from 'preact-router';
 import createHashHistory from 'history/createHashHistory';
 
@@ -20,7 +21,8 @@ class App extends Component {
 					<Home path="/home" />
 					<Posts path="/posts/:id?" />
 					<About path="/about" />
-				</Router>
+        </Router>
+        <Scene />
 			</section>
 		)
 	}
