@@ -122,7 +122,7 @@ class Scene extends Component {
     
     camera.position.x = 0
     camera.position.y = 0
-    camera.position.z = 1920 / window.innerWidth * 4
+    camera.position.z = 8
 
     scene.add(cube)
     
