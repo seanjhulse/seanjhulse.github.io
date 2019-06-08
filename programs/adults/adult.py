@@ -6,7 +6,7 @@ import numpy as np
 # initialize some values
 clf = tree.DecisionTreeClassifier()
 le = preprocessing.LabelEncoder()
-data = np.genfromtxt("adult.data", delimiter=",",dtype=None, encoding="utf8")
+data = np.genfromtxt("../../big_data/adult.data", delimiter=",",dtype=None, encoding="utf8")
 
 # create numeric labels for our string categories
 categories = []
@@ -106,5 +106,5 @@ clf = clf.fit(X, Y)
 test_input(8)
 test_input(52)
 test_input(157)
-custom_input([25, ' Private', 10000, ' Bachelors', 14, ' Unmarried', ' Sales', ' Husband', ' White', ' Male', 55000, 0, 0, ' United-States'])
-custom_input([71, ' Self-emp-not-inc', 494223, ' Some-college', 10, ' Separated', ' Sales', ' Unmarried', ' Black', ' Male', 0, 1816, 2, ' United-States'])
+custom_input([28, ' Private', 77516, ' Bachelors', 14, ' Divorced', ' Tech-support', ' Unmarried', ' White', ' Male', 50000, 0, 40, ' United-States'])
+custom_input([71, ' Self-emp-not-inc', 494223, ' Some-college', 10, ' Separated', ' Sales', ' Unmarried', ' Black', ' Male', 0, 0, 40, ' United-States'])
