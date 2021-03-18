@@ -26,16 +26,16 @@
 					<img class="sprite" src="../images/jurassic_park/samuel_sitting_1.png" />
 				</div>
 				</div>
-				<p>Hold onto your butts. This is not going to be your "MEAN" stack, bleeding edge, tutorial. This is going to be grandpa's Vietnam story. Not the one where he talks about how tough he was in Nam for killing a guy with his toothpick. This is him, chewing on a pipe, talking about how often he had to change his socks. But at the end of the day, you'll be better off for it. Because web development is not about making pretty websites or connecting friends in your measly social web. It's about getting data from point A to point B. Do you know how it happens? If so, <a href="#web-servers-section">go over to the next section</a></p>
+				<p>Hold onto your butts.</p>
 			</section>
 			<section>
 				<h2>TCP/IP</h2>
+				<p>HTTP is built on top of TCP and IP. Transmission Control Protocol (TCP) works in <i>conjuction</i> with Internet Protocol (IP). If the internet is a road, IP is the car. It gets you (the data) from place to place. TCP is like the driver. He controls how the car is moving. In the internet world, your car could be sent hurdling down Main St. in pieces completely out of order. Your tires could arrive an hour before your car seat. That's fine in the internet world. But TCP, he's a careful driver, he wants you to arrive in the same order you left. Front bumper first, back bumper last. Why is that important? Because it guarantees you don't get mangled along the way!</p>
+				<p>In the real world, we sometimes prefer data arrives as fast as possible – order be damned. Lets say you're listening for real-time data reports from your homebrew nuclear silo. Every 0.0001 seconds your silo sends out a packet of data: "OK", "UhOh". You don't want to clog up your network waiting for each "OK" and "UhOh" to reach your server. You just want to know as soon as possible if this silo is going to blow! That's when you'd prefer UDP over TCP.</p>
 				<div class="sprite-container" data-sprite-speed="1">
 					<img class="sprite active" src="../images/jurassic_park/samuel_sitting_6.png" />
 					<img class="sprite" src="../images/jurassic_park/samuel_sitting_7.png" />
 				</div>
-				<p>HTTP is built on top of TCP and IP. Transmission Control Protocol (TCP) works in <i>conjuction</i> with Internet Protocol (IP). If the internet is a road, IP is the car. It gets you (the data) from place to place. TCP is like the driver. He controls how the car is moving. In the internet world, your car could be sent hurdling down Main St. in pieces completely out of order. Your tires could arrive an hour before your car seat. That's fine in the internet world. But TCP, he's a careful driver, he wants you to arrive in the same order you left. Front bumper first, back bumper last. Why is that important? Because it guarantees you don't get mangled along the way!</p>
-				<p>In the real world, we sometimes prefer data arrives as fast as possible – order be damned. Lets say you're listening for real-time data reports from your homebrew nuclear silo. Every 0.0001 seconds your silo sends out a packet of data: "OK", "UhOh". You don't want to clog up your network waiting for each "OK" and "UhOh" to reach your server. You just want to know as soon as possible if this silo is going to blow! That's when you'd prefer UDP over TCP.</p>
 				<p><strong>TL;DR TCP ensures data arrives in order</strong></p>
 				<h2>IP</h2>
 				<p>So lets follow a data packet from client (your computer) to server (https://google.co.uk).</p>
