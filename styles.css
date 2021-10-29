@@ -1,0 +1,94 @@
+.work-history {
+  padding: 25px 0;
+}
+.info-point {
+  color: white;
+}
+.info-circle {
+  position: relative;
+  display: inline-block;
+  border-radius: 50%;
+  padding: 15px;
+  line-height: 0;
+  background-color: #314152;
+  font-size: 1.85rem;
+  font-weight: bold;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+}
+.info-circle.hobby {
+    background-color: #523131;
+}
+.info-circle.education {
+    background-color: #325332;
+}
+
+.info-circle-number {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.info-time {
+  display: inline-block;
+  top: -10px;
+  left: -18px;
+  position: relative;
+  font-size: 1.15rem;
+  font-weight: bold;
+}
+.info-descriptor {
+  display: inline-block;
+  font-size: 25px;
+  position: relative;
+  top: -15px;
+  left: -10px;
+  border-left: 10px dotted #314152;
+  padding: 3px 12px;
+}
+.info-descriptor.hobby {
+  border-left: 10px dotted #523131;
+}
+.info-descriptor.education {
+    border-left: 10px dotted #325332;
+}
+
+.background-instance {
+  padding: 10px;
+  border: 5px solid #314152;
+  border-left: 2px solid #314152;
+  border-top: 2px solid #314152;
+  margin: 15px 0;
+  border-radius: 10px;
+}
+.background-instance.hobby {
+    border: 5px solid #523131;
+  border-left: 2px solid #523131;
+  border-top: 2px solid #523131;
+}
+.background-instance.education {
+    border: 5px solid #325332;
+  border-left: 2px solid #325332;
+  border-top: 2px solid #325332;
+}
+
+.background-misc {
+    font-style: italic;
+}
+.background-title {
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+.background-tooling-title {
+  font-weight: bold;
+  font-size: 1.15rem;
+}
+.examples-title {
+  font-weight: bold;
+  font-size: 1.15rem;
+  margin-bottom: 0;
+}
+.examples-list {
+    margin-top: 5px;
+}
